@@ -197,10 +197,10 @@
                 <div class="row mt-3">
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <h6 class="text-uppercase fw-bold mb-4"> Liên hệ </h6>
-                        <p><i class="fas fa-home me-3"></i> 500 Tôn Đản Thành Phố Đà Nẵng</p>
+                        <p><i class="fas fa-home me-3"></i> 500 Tôn Đản- Đà Nẵng - Việt Nam</p>
                         <p>
                             <i class="fas fa-envelope me-3"></i>
-                            anhduyphamhoang2000@gmail.com
+                            admin@gmail.com
                         </p>
                         <p><i class="fas fa-phone me-3"></i> 0906023003</p>
                     </div>
@@ -235,16 +235,16 @@
                             Mạng xã hội
                         </h6>
 
-                        <a href="https://www.facebook.com/tntlit/" class="me-4 text-reset">
+                        <a href="https://www.facebook.com/tntlit" class="me-4 text-reset">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.facebook.com/tntlit/" class="me-4 text-reset">
+                        <a href="https://www.facebook.com/tntlit" class="me-4 text-reset">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="https://www.facebook.com/tntlit/" class="me-4 text-reset">
+                        <a href="https://www.facebook.com/tntlit" class="me-4 text-reset">
                             <i class="fab fa-google"></i>
                         </a>
-                        <a href="https://www.facebook.com/tntlit/" class="me-4 text-reset">
+                        <a href="https://www.facebook.com/tntlit" class="me-4 text-reset">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
@@ -255,7 +255,7 @@
         <section class=" justify-content-center justify-content-lg-between p-4 border-top"
             style="background-color: #757575;">
             <div class="text-center me-5 d-none d-lg-block">
-                <span class="text-center text-white">© 2025 Bản quyền thuộc về Anh Duy:
+                <span class="text-center text-white">© 2025 Bản quyền thuộc về: Anh Duy
                     <a class="text-white" href="/">SHOESVN</a>
                 </span>
             </div>

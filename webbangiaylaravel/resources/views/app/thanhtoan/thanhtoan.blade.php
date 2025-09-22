@@ -23,7 +23,7 @@
 
     @foreach ($giohangs as $giohang)
         @php
-            $tongtien += $giohang['so_luong'] * $giohang['don_gia'] - $giohang['so_luong'] * $giohang['don_gia'] * $giohang['khuyen_mai'] * 0.01;
+            $tongtien += ($giohang['so_luong'] ?? 1) * ($giohang['don_gia'] ?? 0);
         @endphp
     @endforeach
 
@@ -35,7 +35,7 @@
                     <div class="card-header">
                         <h5 class="card-title" style="margin-top: 10px">THÔNG TIN NHẬN HÀNG:</h5>
                     </div>
-                    
+
                     <div class="card-body">
                         <div class="form-group">
                             <label for="bank_code">Hình thức thanh toán:</label>
@@ -74,7 +74,8 @@
                         </div>
                         <br>
                         <div class="form-outline">
-                            <input type="text" class="form-control" name="sdt" value="{{ $data['sdt'] }}" required />
+                            <input type="text" class="form-control" name="sdt" value="{{ $data['sdt'] }}"
+                                required />
                             <label class="form-label">Số điện thoại</label>
                         </div>
                         <br>
@@ -90,9 +91,11 @@
                             <label class="form-label">Ghi chú</label>
                         </div>
 
-                        <input type="hidden" class="form-control" name="tong_tien" value="{{ number_format($tongtien) }} VNĐ" />
-                       
-                        <input type="hidden" name="thanh_toans" value="{{ serialize($giohangs) }}" />
+                        <input type="hidden" class="form-control" name="tong_tien"
+                            value="{{ number_format($tongtien) }} VNĐ" />
+
+                        <input type="hidden" name="thanh_toans" value="{{ json_encode($giohangs) }}" />
+
 
                         <br>
                         <button type="submit" class="btn btn-success btn-block">Thanh Toán</button>
@@ -118,7 +121,7 @@
                             @foreach ($giohangs as $giohang)
                                 <tr>
                                     <td scope="row">{{ $giohang['ten_giay'] }}</td>
-                                    <td>{{ number_format($km = sprintf('%d', $giohang['so_luong'] * $giohang['don_gia'] - $giohang['so_luong'] * $giohang['don_gia'] * $giohang['khuyen_mai'] * 0.01)) }}
+                                    <td>{{ number_format(($giohang['so_luong'] ?? 1) * ($giohang['don_gia'] ?? 0)) }}
                                         VNĐ</td>
                                 </tr>
                             @endforeach
@@ -128,7 +131,7 @@
                                 <th>32,000 VNĐ</th>
                             </tr>
 
-                            <tr class="text-success  ">
+                            <tr class="text-success">
                                 <th scope="row">Tổng </th>
                                 <th>{{ number_format($tongtien + 32000) }} VNĐ</th>
                             </tr>
@@ -141,11 +144,7 @@
         </div>
     </div>
 
-
-
     <br>
     <br>
     <br>
-
-
 </div>

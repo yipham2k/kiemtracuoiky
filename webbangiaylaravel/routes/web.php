@@ -30,7 +30,11 @@ Route::post('/cua-hang/san-pham={id}/danh-gia', [DanhGiaController::class, 'stor
 
 Route::get('/thanh-toan', [DonHangController::class, 'index']);
 Route::post('/thanh-toan', [DonHangController::class, 'thanhtoan']);
-Route::post('/thanh-toan/hoadon', [DonHangController::class, 'store']);
+Route::post('/thanh-toan/hoadon', [DonHangController::class, 'store']); // <-- đây
+Route::get('/thanh-toan/hoadon', function () {
+  return redirect('/thanh-toan')->with('error', 'Vui lòng thanh toán từ form.');
+});
+
 
 Route::get('/gioi-thieu', [MainController::class, 'aboutUs']);
 
@@ -100,7 +104,11 @@ Route::get('/admin/phanquyen/sua/id={id}', [PhanQuyenController::class, 'edit'])
 Route::post('/admin/phanquyen/sua', [PhanQuyenController::class, 'update']);
 
 // Hóa đơn
-Route::get('/admin/donhang/donhang', [DonHangController::class, 'show']);
+Route::get('/admin/donhang/xem/{id}', [DonHangController::class, 'show']);
 Route::get('/admin/donhang/xoa/id={id}', [DonHangController::class, 'destroy']);
 Route::get('/admin/donhang/xem/id={id}', [DonHangController::class, 'show']);
-
+Route::post('/admin/donhang/duyet/{id}', [DonHangController::class, 'duyetDonHang'])->name('donhang.duyet');
+Route::get('/admin/donhang/xem/{id}', [DonHangController::class, 'xem'])->name('donhang.xem');
+// thay đổi từ POST sang PATCH
+Route::match(['post', 'patch'], '/admin/donhang/{id}/duyet', [DonHangController::class, 'duyetDonHang'])
+  ->name('donhang.duyet');
