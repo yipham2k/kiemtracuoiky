@@ -314,7 +314,7 @@ class MainController extends Controller
     {
         $request->validate([
             'ten_dang_nhap' => 'required',
-            'password' => 'required | min:5',
+            'password' => 'required|min:5',
         ]);
 
         $userinfoEmail = User::where('email', $request->ten_dang_nhap)->first();
@@ -325,12 +325,10 @@ class MainController extends Controller
             if (!$userinfoUser) {
                 return back()->with('thatbai', '* Tên đăng nhập hoặc Email không tồn tại!');
             } else {
+                // Tìm thấy theo Ten_dang_nhap
                 if (Hash::check($request->password, $userinfoUser->password)) {
+                    // Đăng nhập thành công bằng username
                     $request->session()->put('DangNhap', $userinfoUser->id);
-                    // ... load data & return view
-                } elseif (session()->put('check', '0')) {
-
-                    return back()->with('thatbai', '* Mật khẩu nhập không đúng, vui lòng nhập lại');
 
 
 
@@ -370,12 +368,15 @@ class MainController extends Controller
                         ;
                     }
                 } else {
+                    // Sai mật khẩu cho username
                     session()->put('check', '0');
                     return back()->with('thatbai', '* Mật khẩu nhập không đúng, vui lòng nhập lại');
                 }
             }
         } else {
+            // Tìm thấy theo email
             if (Hash::check($request->password, $userinfoEmail->password)) {
+                // Đăng nhập thành công bằng email
                 $request->session()->put('DangNhap', $userinfoEmail->id);
 
                 $data = User::where('id', session('DangNhap'))->first();
@@ -418,6 +419,7 @@ class MainController extends Controller
                     ;
                 }
             } else {
+                // Sai mật khẩu cho email
                 session()->put('check', '0');
                 return back()->with('thatbai', '* Mật khẩu nhập không đúng, vui lòng nhập lại');
             }
