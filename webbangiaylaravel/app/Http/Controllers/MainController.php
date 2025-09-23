@@ -284,19 +284,18 @@ class MainController extends Controller
     // Register;
     public function storeReg(Request $request)
     {
-        // $request->validate([
-        //     'ten_nguoi_dung' => 'required',
-        //     'email' => 'required | email | unique:users',
-        //     'sdt' => 'required',
-        //     'Ten_dang_nhap' => 'required | unique:users',
-        //     'password' => 'required | min:5 | confirmed',
-        //     'id_phan_quyen' => 'required',
-        // ],[
-        //     'email.unique' => '* Email đã tồn tại.',
-        //     'Ten_dang_nhap.unique' => '* Tên đăng nhập đã tồn tại.',
-        //     'password.min' => '* Mật khẩu phải chứa ít nhất 5 kí tự.',
-        //     'password.confirmed' => '* Mật khẩu xác nhận nhập không đúng.',
-        // ]);
+        $request->validate([
+            'ten_nguoi_dung' => 'required',
+            'email' => 'required | email | unique:users',
+            'sdt' => 'required',
+            'Ten_dang_nhap' => 'required | unique:users',
+            'password' => 'required | min:5',
+        ], [
+            'email.unique' => '* Email đã tồn tại.',
+            'Ten_dang_nhap.unique' => '* Tên đăng nhập đã tồn tại.',
+            'password.min' => '* Mật khẩu phải chứa ít nhất 5 kí tự.',
+            'password.confirmed' => '* Mật khẩu xác nhận nhập không đúng.',
+        ]);
 
         User::create([
             'ten_nguoi_dung' => $request->input('ten_nguoi_dung'),
@@ -326,11 +325,14 @@ class MainController extends Controller
             if (!$userinfoUser) {
                 return back()->with('thatbai', '* Tên đăng nhập hoặc Email không tồn tại!');
             } else {
-                $user = User::find($userinfoUser->id);
-                $userinfoUser->password = Hash::make($request->password);
-                $user->update();
                 if (Hash::check($request->password, $userinfoUser->password)) {
                     $request->session()->put('DangNhap', $userinfoUser->id);
+                    // ... load data & return view
+                } elseif (session()->put('check', '0')) {
+
+                    return back()->with('thatbai', '* Mật khẩu nhập không đúng, vui lòng nhập lại');
+
+
 
                     $data = User::where('id', session('DangNhap'))->first();
                     $thuonghieus = ThuongHieu::all();
